@@ -14,4 +14,4 @@ python3 UUTest.py
 
 This reads the files from the CV Data folder and prints files for each species containing 0 or 1 for each frame in the Output folder. If you uncomment the last line in the function gcmlcm(), it will also output plots for the ecdf of each species in each frame in the folder /Plots/ecdf.
 
-Finally, the .py file reads the files in the Output folder and plots the figures in /Plots
+Finally, the Plotting.py file reads the files in the Output folder and plots the figures in /Plots
