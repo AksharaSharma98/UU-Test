@@ -11,12 +11,16 @@
 # python_call program_name system_file trajectory_file sel_string_1 sel_string_2 sel_string_3 grid_size histogram_bins 
 # python3 membrane_enrichment.py 1DIPC.psf 1DIPC_8us.dcd 'resname=="DIPC"' 'resname=="DPPC"' 'resname=="CHOL"' 10 10
 
+import os
 import sys
 import loos
 import loos.pyloos
 import loosfunc
 import math
 import numpy as np
+
+
+dir = os.path.dirname(__file__)
 
 #header = " ".join(sys.argv)
 #print("# ", header)
@@ -94,7 +98,7 @@ while traj.nextFrame():
             # calculate and append histogams of enrichment to the histogram column stack
             labels = ["DIPC","DPPC","Chol"]
             leaflet_label = ["Upper","Lower"]
-            np.savetxt(leaflet_label[l]+'_leaflet_enrichment_'+labels[i]+'_'+str(frame)+'.txt', enr.flatten(), fmt='%.6e')
+            np.savetxt(os.path.join(dir, "Output",leaflet_label[l]+'_leaflet_enrichment_'+labels[i]+'_'+str(frame)+'.txt', enr.flatten(), fmt='%.6e'))
             hist[l][i] = np.vstack((hist[l][i], loosfunc.histogram(enr, hist_bins, 0.0, 3.0)))
     frame += 1
 
@@ -103,4 +107,4 @@ labels = ["DIPC","DPPC","Chol"]
 leaflet_label = ["Upper","Lower"]
 for l in range(2):
     for i in range(len(leaflet_sel[l])):
-        np.savetxt(leaflet_label[l]+'_leaflet_enrichment_'+labels[i]+'.txt', hist[l][i], fmt='%.6e')
+        np.savetxt(os.path.join(dir, "CV Data",leaflet_label[l]+'_leaflet_enrichment_'+labels[i]+'.txt', hist[l][i], fmt='%.6e'))

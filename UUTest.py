@@ -382,8 +382,8 @@ if __name__ == "__main__":
     data = [[] for i in range(len(species))]
     
     for i in range(frames):
-        upper = [np.loadtxt(os.path.join(dir, "Output", "Upper_leaflet_enrichment_"+species[j]+"_"+str(i)+".txt")) for j in range(len(species))]
-        lower = [np.loadtxt(os.path.join(dir, "Output", "Lower_leaflet_enrichment_"+species[j]+"_"+str(i)+".txt")) for j in range(len(species))]
+        upper = [np.loadtxt(os.path.join(dir, "CV Data", "Upper_leaflet_enrichment_"+species[j]+"_"+str(i)+".txt")) for j in range(len(species))]
+        lower = [np.loadtxt(os.path.join(dir, "CV Data", "Lower_leaflet_enrichment_"+species[j]+"_"+str(i)+".txt")) for j in range(len(species))]
         
         CV = []
         
@@ -404,4 +404,4 @@ if __name__ == "__main__":
                 data[j].append(1)
     
     for i in range(len(species)):
-        np.savetxt('UU_Test_'+species[i]+'.txt', data[i], fmt='%.1e')
+        np.savetxt(os.path.join(dir,"Output",'UU_Test_'+species[i]+'.txt', data[i], fmt='%.1e'))
