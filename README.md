@@ -4,7 +4,7 @@ Unimodal Uniform Test implementation for LOOS
 
 For Ashlin:
 
-The code is run in two steps:
+The code is run in three steps:\n
 python3 membrane_enrichment.py 1DIPC.psf 1DIPC_8us.dcd 'resname=="DIPC"' 'resname=="DPPC"' 'resname=="CHOL"' 8 12
 
 This is the membrane enrichment calculation on an 8x8 pixel grid that is used to output the raw enrichment data from each frame for each species in each leaflet.
