@@ -107,4 +107,4 @@ labels = ["DIPC","DPPC","Chol"]
 leaflet_label = ["Upper","Lower"]
 for l in range(2):
     for i in range(len(leaflet_sel[l])):
-        np.savetxt(os.path.join(dir, "CV Data",leaflet_label[l]+'_leaflet_enrichment_'+labels[i]+'.txt', hist[l][i], fmt='%.6e'))
+        np.savetxt(os.path.join(dir,"CV Data",leaflet_label[l]+'_leaflet_enrichment_'+labels[i]+'.txt', hist[l][i], fmt='%.6e'))
