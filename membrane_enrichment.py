@@ -98,7 +98,7 @@ while traj.nextFrame():
             # calculate and append histogams of enrichment to the histogram column stack
             labels = ["DIPC","DPPC","Chol"]
             leaflet_label = ["Upper","Lower"]
-            np.savetxt(os.path.join(dir,"CV Data",leaflet_label[l]+'_leaflet_enrichment_'+labels[i]+'_'+str(frame)+'.txt', enr.flatten(), fmt='%.6e'))
+            np.savetxt(os.path.join(dir,"CV Data",leaflet_label[l]+'_leaflet_enrichment_'+labels[i]+'_'+str(frame)+'.txt'), enr.flatten(), fmt='%.6e')
             hist[l][i] = np.vstack((hist[l][i], loosfunc.histogram(enr, hist_bins, 0.0, 3.0)))
     frame += 1
 
@@ -107,4 +107,4 @@ labels = ["DIPC","DPPC","Chol"]
 leaflet_label = ["Upper","Lower"]
 for l in range(2):
     for i in range(len(leaflet_sel[l])):
-        np.savetxt(os.path.join(dir,"CV Data",leaflet_label[l]+'_leaflet_enrichment_'+labels[i]+'.txt', hist[l][i], fmt='%.6e'))
+        np.savetxt(os.path.join(dir,"CV Data",leaflet_label[l]+'_leaflet_enrichment_'+labels[i]+'.txt'), hist[l][i], fmt='%.6e')
