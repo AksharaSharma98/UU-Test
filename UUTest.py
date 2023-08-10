@@ -56,7 +56,10 @@ def ecdf(X):
 
 
 def intersect(X,P0,P1):
-    
+    """
+    Takes in a dataset X of random variables and two bounds, and outputs the 
+    portion of the dataset within those bounds
+    """
     X1 = [value for value in X if value >= P0]                  # X1 = X(x>=P0)
     X2 = [value for value in X if value <= P1]                  # X2 = X(x<=P1)
     XX = [value for value in X1 if value in X2]            # X1 intersection X2
@@ -65,7 +68,11 @@ def intersect(X,P0,P1):
 
 
 def convexhull(x, F):
-    
+    """
+    Takes in ordered x and y values of an ecdf and calculates its convex hull
+    points using scipy.spatial.ConvexHull. Returns the indices of the hull 
+    points in the input values lists in counterclockwise order.
+    """
     points = []
     for i in range(len(x)):
         points.append([x[i],F[i]])
