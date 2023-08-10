@@ -86,7 +86,7 @@ def KS(X):
         # Check to avoid KS test failure for very few extremely close points.
         # If not used, it can break the scipy convex hull function due to 
         # underflow compared to its precision limit
-        if max(X)-min(X) <= 0.00000001:
+        if max(X)-min(X) <= 0.000001:
             return 1
         
         x = np.random.uniform(low, high, 10000)
@@ -110,9 +110,10 @@ def gcmlcm(X, species, frame, recur):
     F.pop(0)
     x.pop(0)
     
-    if len(x) < 3:
-        gcm, gcmf = [x[0]], [F[0]]
-        lcm, lcmf = [x[1]], [F[1]]
+    x_unique = np.unique(np.array(x))
+    if len(x_unique) < 3:
+        gcm, gcmf = [x_unique[0]], [min(F)]
+        lcm, lcmf = [x_unique[1]], [max(F)]
         
         return gcm, lcm
     
