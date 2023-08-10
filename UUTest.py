@@ -83,6 +83,10 @@ def convexhull(x, F):
 
 
 def KS(X):
+    """
+    Kolmogorov Smirnov uniformity test of a dataset of random variables X. 
+    Returns 1 if dataset is uniform, 0 if it is non-uniform.
+    """
     if len(list(np.unique(np.array(X)))) <= 2:
         return 1
     
@@ -112,7 +116,12 @@ def KS(X):
 
 
 def gcmlcm(X, species, frame, recur):
-    
+    """
+    Takes in a dataset of random variables X and calculates the ecdf of X. It
+    then uses the convex hull points of the ecdf to calculate the greatest 
+    convex minorant and least concave majorant of the ecdf.
+    Returns lists of the gcm and lcm points.
+    """
     F, x = ecdf(X)
     F.pop(0)
     x.pop(0)
