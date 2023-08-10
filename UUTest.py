@@ -11,6 +11,7 @@ import numpy as np
 from scipy import stats
 from scipy.spatial import ConvexHull
 import matplotlib.pyplot as plt
+import argparse
 
 
 dir = os.path.dirname(__file__)
@@ -376,9 +377,23 @@ def UU_Test(X, species, frame):
 # Main
 
 if __name__ == "__main__":
-    
-    frames = 80
-    species = ["DIPC","DPPC","Chol"]
+
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--frameNum',
+                        type=int,
+                        default=10,
+                        help='Number of frames', nargs='+')
+    parser.add_argument('--species',
+                        type=str,
+                        help='List of input files', nargs='+')
+    args = parser.parse_args()
+    frames = args.frameNum
+
+    species = []
+    for item in range(len(args.species)):
+        species.append(args.species[item])
+
     data = [[] for i in range(len(species))]
     
     for i in range(frames):
@@ -404,4 +419,4 @@ if __name__ == "__main__":
                 data[j].append(1)
     
     for i in range(len(species)):
-        np.savetxt(os.path.join(dir,"Output",'UU_Test_'+species[i]+'.txt', data[i], fmt='%.1e'))
+        np.savetxt(os.path.join(dir,"Output",'UU_Test_'+species[i]+'.txt'), data[i], fmt='%.1e')

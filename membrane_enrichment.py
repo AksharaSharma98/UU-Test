@@ -96,14 +96,14 @@ while traj.nextFrame():
                     enr = np.vstack((enr, loosfunc.enrichment(pop, bin_size, ideal_conc[i])))
             
             # calculate and append histogams of enrichment to the histogram column stack
-            labels = ["DIPC","DPPC","Chol"]
+            labels = [sel1[0].resname(),sel2[0].resname(),selc[0].resname()]
             leaflet_label = ["Upper","Lower"]
             np.savetxt(os.path.join(dir,"CV Data",leaflet_label[l]+'_leaflet_enrichment_'+labels[i]+'_'+str(frame)+'.txt'), enr.flatten(), fmt='%.6e')
             hist[l][i] = np.vstack((hist[l][i], loosfunc.histogram(enr, hist_bins, 0.0, 3.0)))
     frame += 1
 
 # output histograms of each lipid species in each leaflet
-labels = ["DIPC","DPPC","Chol"]
+labels = [sel1[0].resname(),sel2[0].resname(),selc[0].resname()]
 leaflet_label = ["Upper","Lower"]
 for l in range(2):
     for i in range(len(leaflet_sel[l])):
