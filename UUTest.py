@@ -383,7 +383,7 @@ if __name__ == "__main__":
     parser.add_argument('--frameNum',
                         type=int,
                         default=10,
-                        help='Number of frames', nargs='+')
+                        help='Number of frames')
     parser.add_argument('--species',
                         type=str,
                         help='List of input files', nargs='+')
