@@ -48,7 +48,7 @@ def ecdf(X):
     F = []
     
     for point in X:
-        count = N - 1 - X[::-1].index(point)
+        count = N - X[::-1].index(point)
         f = count/N
         F.append(f)
     
