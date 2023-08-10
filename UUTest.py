@@ -304,7 +304,10 @@ def UU(SG, PI, SL, X, species, frame, recur):
     
     # remove last element of gcm (common with last element of lcm)
     # remove first elelent of lcm (common with first elelent of gcm)
-    gcm.pop(), lcm.pop(0)
+    if len(gcm) > 1:
+        gcm.pop()
+    if len(lcm) > 1:
+        lcm.pop(0)
     
     C, ind = consistent(gcm, lcm)
     
@@ -325,8 +328,9 @@ def UU(SG, PI, SL, X, species, frame, recur):
             elif len(pos) != 0 and pos[0] == 1:
                 PI_ = C[i][0:pos[0]+1]
                 PL = C[i][pos[0]+1:len(C[i])]
-                
-                PL_, success = sufficient(PL,X)
+
+                if len(PL) != 0:
+                    PL_, success = sufficient(PL,X)
                 if success == False: continue
                 
                 SL_.extend(PL_)
@@ -335,8 +339,9 @@ def UU(SG, PI, SL, X, species, frame, recur):
             elif pos[0] == len(C[i])-1:
                 PG = C[i][0:pos[0]-1]
                 PI_ = C[i][pos[0]-1:len(C[i])]
-                
-                PG_, success = sufficient(PG,X)
+
+                if len(PG) != 0:
+                    PG_, success = sufficient(PG,X)
                 if success == False: continue
                 
                 SG_.extend(PG_)
