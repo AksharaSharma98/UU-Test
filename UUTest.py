@@ -42,17 +42,18 @@ def ecdf(X):
     function (ecdf) of X.
     ecdf(X) is given by:
         F(x_i) = (number of data points <= x_i in X)/N
-        where x_i are the data points in X
+    where x_i are the unique data points in X
     """
     N = len(X)
+    x = list(np.unique(np.array(X)))
     F = []
     
-    for point in X:
+    for point in x:
         count = N - X[::-1].index(point)
-        f = count/N
+        f = np.float64(count/N)
         F.append(f)
     
-    return F, X
+    return F, x
 
 
 def intersect(X,P0,P1):
