@@ -382,7 +382,7 @@ def UU(SG, PI, SL, X, species, frame, recur):
 
 def UU_Test(X, species, frame):
     
-    X = list(X)
+    X = list(np.around(X,6))    # rounds off input to 6 decimal places. Avoids numbers like 1.5142793000000001
     X.sort()
     
     # initialize convex, intermediate, and concave segments, the success flag 
