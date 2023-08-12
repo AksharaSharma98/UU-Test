@@ -124,8 +124,6 @@ def gcmlcm(X, species, frame, recur):
     Returns lists of the gcm and lcm points.
     """
     F, x = ecdf(X)
-    F.pop(0)
-    x.pop(0)
     
     x_unique = np.unique(np.array(x))
     if len(x_unique) < 3:
