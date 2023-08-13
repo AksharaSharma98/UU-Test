@@ -91,7 +91,7 @@ def KS(X):
     if len(list(np.unique(np.array(X)))) <= 2:
         return 1
     
-    elif len(X)>1:
+    else:
         # make a uniform distribution cdf
         low, high = min(X), max(X)
         
@@ -101,19 +101,16 @@ def KS(X):
         if max(X)-min(X) <= 0.000001:
             return 1
         
-        x = np.random.uniform(low, high, 10000)
+        x = np.random.uniform(low, high, 50000)
         
         # perform KS test
         res = stats.kstest(X, x)
         
         # interpret p-value output
-        if res.pvalue >= 0.01:
+        if res.pvalue >= 0.001:
             return 1
         else:
             return 0
-    
-    else:
-        return 1
 
 
 def gcmlcm(X, species, frame, recur):
@@ -126,7 +123,7 @@ def gcmlcm(X, species, frame, recur):
     F, x = ecdf(X)
     
     x_unique = np.unique(np.array(x))
-    if len(x_unique) < 3:
+    if len(x_unique) < 3: # The KS test catches any datasets with less than 2 unique x values
         gcm, gcmf = [x_unique[0]], [min(F)]
         lcm, lcmf = [x_unique[1]], [max(F)]
         
