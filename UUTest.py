@@ -107,7 +107,7 @@ def KS(X):
         res = stats.kstest(X, x)
         
         # interpret p-value output
-        if res.pvalue >= 0.001:
+        if res.pvalue >= 0.01:
             return 1
         else:
             return 0
@@ -130,36 +130,44 @@ def gcmlcm(X, species, frame, recur):
         return gcm, lcm
     
     # get indices of convex hull points, create an ordered list of hull points
-    indices = convexhull(x, F)
-    indices = np.roll(indices, -np.argmin(indices))
+    try:
+        indices = convexhull(x, F)
+        
+    except Exception as e:
+        print("ERROR: ", e)
+        plt.plot(x, F, color = 'red')
+        return [], [], True
     
-    hullX, hullF = [], []
-    for i in range(len(indices)):
-        hullX.append(x[indices[i]])
-        hullF.append(F[indices[i]])
+    else:
+        indices = np.roll(indices, -np.argmin(indices))
+        
+        hullX, hullF = [], []
+        for i in range(len(indices)):
+            hullX.append(x[indices[i]])
+            hullF.append(F[indices[i]])
+        
+        gcm, lcm = [], []
+        gcmf, lcmf = [], []
+        
+        end0 = hullX.index(min(hullX))
+        end1 = hullX.index(max(hullX))
+        
+        lcm.extend([hullX[end0], hullX[end1]])
+        lcmf.extend([hullF[end0], hullF[end1]])
+        for i in range(end0, end1+1):
+            gcm.append(hullX[i])
+            gcmf.append(hullF[i])
+        for i in range(end1+1, len(indices)):
+            lcm.append(hullX[i])
+            lcmf.append(hullF[i])
     
-    gcm, lcm = [], []
-    gcmf, lcmf = [], []
-    
-    end0 = hullX.index(min(hullX))
-    end1 = hullX.index(max(hullX))
-    
-    lcm.extend([hullX[end0], hullX[end1]])
-    lcmf.extend([hullF[end0], hullF[end1]])
-    for i in range(end0, end1+1):
-        gcm.append(hullX[i])
-        gcmf.append(hullF[i])
-    for i in range(end1+1, len(indices)):
-        lcm.append(hullX[i])
-        lcmf.append(hullF[i])
-
-    lcm.sort()
-    lcmf.sort()
-    
-    # uncomment if ecdf of total data of each frame, each species is required
-    # if recur == 0: plot_ecdf(x, F, gcm, gcmf, lcm, lcmf, hullX, species, frame)
-    
-    return gcm, lcm
+        lcm.sort()
+        lcmf.sort()
+        
+        # uncomment if ecdf of total data of each frame, each species is required
+        # if recur == 0: plot_ecdf(x, F, gcm, gcmf, lcm, lcmf, hullX, species, frame)
+        
+        return gcm, lcm, False
 
 
 def forward_search(X, PF, eL):
@@ -297,6 +305,12 @@ def UU(SG, PI, SL, X, species, frame, recur):
     
     # compute gcm and lcm subsets of X
     gcm, lcm = gcmlcm(XX, species, frame, recur)
+    
+    # if linear is true, return success
+    if linear == True:
+        PI_ = PI
+        success = True
+        return SG_, PI_, SL_, success
     
     # remove last element of gcm (common with last element of lcm)
     # remove first elelent of lcm (common with first elelent of gcm)
