@@ -305,7 +305,7 @@ def UU(SG, PI, SL, X, species, frame, recur):
         return SG_, PI_, SL_, success
     
     # compute gcm and lcm subsets of X
-    gcm, lcm = gcmlcm(XX, species, frame, recur)
+    gcm, lcm, linear = gcmlcm(XX, species, frame, recur)
     
     # if linear is true, return success
     if linear == True:
