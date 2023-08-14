@@ -136,6 +136,7 @@ def gcmlcm(X, species, frame, recur):
     except Exception as e:
         print("ERROR: ", e)
         plt.plot(x, F, color = 'red')
+        plt.savefig(os.path.join(dir,"Plot_ecdf_"+str(frame)+"_"+species+"_"+recur+".png"))
         return [], [], True
     
     else:
