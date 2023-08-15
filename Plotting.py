@@ -62,47 +62,12 @@ for element, psep, label in zip(data, UU, labels):
     ax = fig.add_subplot(1, 1, 1)
     ax.plot(np.arange(0,frames), psep, color = 'red')
     
-    # c1 = ax.vlines(psep[:], 0.0, 1.0, linestyles = 'solid', color = color, linewidth = 1.0)
     c1 = ax.axis([0, frames, -0.01, 1.01])
     ax.set_xlabel("Frames",fontsize = 15)
-    # # ax.set_yticklabels(["Run3","Run2","Run1"])
     ax.set_xticklabels(np.arange(0, frames, 10))
     ax.set_yticklabels([0,1])
     ax.set_ylabel("Phase separation",fontsize = 15)
-    # # ax.set_ylabel("H-bond Occupancy (binary)")
-    #fig.colorbar(color)
+    ax.set_title(label+" multimodality",fontsize = 20)
     
     fig.tight_layout()
     plt.savefig(os.path.join(dir,"Plots" ,"UU_"+label+"_"+str(pixel_grid)+"_"+str(hist_bins)+".png"))
-    
-    
-    # fig, ax = plt.subplots(2, 1, gridspec_kw={'height_ratios': [3, 1]}, figsize=(30, 16), dpi=300)
-    
-    # ax = fig.add_subplot(2, 1, 1)
-    # c = ax.pcolormesh(x, y, element, cmap='viridis')
-    # # set the limits of the plot to the limits of the data
-    # ax.axis([x.min(), x.max(), y.min(), y.max()])
-    # ax.set_xlabel("Frames",fontsize = 15)
-    # ax.set_ylabel("Enrichment",fontsize = 15)
-    # ax.set_title(label+" enrichment histogram over trajectory",fontsize = 20)
-    # fig.colorbar(c, ax=ax)
-    
-    # colors = ['cyan','green']
-    # color = [colors[int(sep)] for sep in psep]
-    
-    # ax = fig.add_subplot(2, 1, 2)
-    # ax.plot(np.arange(0,frames), psep, color = 'red')
-    
-    # # c1 = ax.vlines(psep[:], 0.0, 1.0, linestyles = 'solid', color = color, linewidth = 1.0)
-    # c1 = ax.axis([0, frames, -0.01, 1.01])
-    # ax.set_xlabel("Frames",fontsize = 15)
-    # # # ax.set_yticklabels(["Run3","Run2","Run1"])
-    # ax.set_xticklabels(np.arange(0, frames, 10))
-    # ax.set_yticklabels([0,1])
-    # ax.set_ylabel("Phase separation",fontsize = 15)
-    # # # ax.set_ylabel("H-bond Occupancy (binary)")
-    # #fig.colorbar(color)
-    
-    # #fig.tight_layout()
-    # # plt.show()
-    # plt.savefig("Plot_"+label+"_"+str(pixel_grid)+"_"+str(hist_bins)+".png")
