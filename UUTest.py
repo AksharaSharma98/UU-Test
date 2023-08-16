@@ -437,7 +437,7 @@ if __name__ == "__main__":
         #print("\nFrame: "+str(i+1)+"\n")
         for j in range(len(species)):
             # average CV for the species over leaflets
-            CV.append((upper[j] + lower[j])/2)
+            CV.append(np.append(upper[j], lower[j]))
             
             # call UU test
             SG, PI, SL, success = UU_Test(CV[j], species[j], i)
